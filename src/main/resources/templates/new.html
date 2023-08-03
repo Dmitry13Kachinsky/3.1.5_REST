@@ -16,6 +16,12 @@
     <input type="text" th:field="*{username}" id="username">
     <label for="password">Enter password: </label>
     <input type="text" th:field="*{password}" id="password">
+    <label>Enter role:
+        <select size="2" multiple name="roles" >
+            <option value="1">USER</option>
+            <option selected="selected" value="2">ADMIN</option>
+        </select>
+    </label>
     <br/>
     <input type="submit" value="Create!"/>
 </form>

@@ -2,10 +2,9 @@ package ru.kata.spring.boot_security.demo.entities;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.Set;
+
 
 @Entity
 @Table(name="sec_users")
@@ -27,12 +26,12 @@ public class User implements UserDetails {
     private String username;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    private Set<Role> roles;
+    private Collection<Role> roles;
 
     public User() {
     }
 
-    public User(String name, String surname, String password, String username, Set<Role> roles) {
+    public User(String name, String surname, String password, String username, Collection<Role> roles) {
         this.name = name;
         this.surname = surname;
         this.password = password;
@@ -100,11 +99,11 @@ public class User implements UserDetails {
     }
 
 
-    public Set<Role> getRoles() {
+    public Collection<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(Collection<Role> roles) {
         this.roles = roles;
     }
 
@@ -114,5 +113,14 @@ public class User implements UserDetails {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", username='" + username + '\'' +
+                '}';
     }
 }

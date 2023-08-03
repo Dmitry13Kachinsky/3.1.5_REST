@@ -16,7 +16,6 @@ import ru.kata.spring.boot_security.demo.repositories.RoleRepository;
 import ru.kata.spring.boot_security.demo.repositories.UserRepository;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,21 +46,16 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public boolean addNewUser(User user) {
-        if (userRepository.findByUsername(user.getUsername()) == null) {
-            user.setRoles(Collections.singleton(roleRepository.getOne(2)));
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            userRepository.save(user);
-            return true;
-        }
-        return false;
+    public void addNewUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
     }
 
     @Transactional
     public void updateUser(User user) {
-        User oldUser = userRepository.findByUsername(user.getUsername());
-        user.setRoles(oldUser.getRoles());
-        user.setPassword(oldUser.getPassword());
+        if (!user.getPassword().equals(showUserById(user.getId()).getPassword())) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
         userRepository.save(user);
     }
 

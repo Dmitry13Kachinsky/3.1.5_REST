@@ -7,6 +7,8 @@
 </head>
 <body>
 <form th:method="PATCH" th:action="@{/admin/user/{id}(id=${user.getId()})}" th:object="${user}">
+    <label for="id">ID</label>
+    <input readonly type="number" th:field="*{id}" id="id" placeholder="ID">
     <label for="name">Enter name: </label>
     <input type="text" th:field="*{name}" id="name">
     <label for="surname">Enter surname: </label>

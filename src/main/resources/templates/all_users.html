@@ -5,7 +5,7 @@
     <title></title>
 </head>
 <body>
-<table border="1">
+<table style="width:300px">
     <thead>
     <tr>
         <th>id</th>
@@ -15,23 +15,25 @@
         <th>role</th>
     </tr>
     </thead>
-    <tbody th:each ="user : ${users}">
-        <tr>
-            <td th:text="${user.getId()}">VALUE</td>
-            <td th:text="${user.getName()}">VALUE</td>
-            <td th:text="${user.getSurname()}">VALUE</td>
-            <td th:text="${user.getUsername()}">VALUE</td>
-            <td th:each="role : ${user.getRoles()}" th:utext="${role.getName()}">ROLE</td>
+    <tbody th:each="user : ${users}">
+    <tr>
+        <td th:text="${user.getId()}">VALUE</td>
+        <td th:text="${user.getName()}">VALUE</td>
+        <td th:text="${user.getSurname()}">VALUE</td>
+        <td th:text="${user.getUsername()}">VALUE</td>
+        <td th:each="role : ${user.getRoles()}" th:utext="${role.getName()}">ROLE</td>
 
-            <td>
-                <form th:method="GET" th:action="@{/admin/user/{id}/edit(id=${user.getId()})}">
-                    <input type="submit" value="Update">
-                </form> <td>
-                <form th:method="DELETE" th:action="@{/admin/user/{id}(id=${user.getId()})}">
-                    <input type="submit" value="Delete"/>
-                </form>
-            </td>
-        </tr>
+        <td>
+            <form th:method="GET" th:action="@{/admin/user/{id}/edit(id=${user.getId()})}">
+                <input type="submit" value="Update">
+            </form>
+        <td>
+            <form th:method="DELETE" th:action="@{/admin/user/{id}(id=${user.getId()})}">
+                <input type="submit" value="Delete"/>
+            </form>
+        </td>
+
+    </tr>
     </tbody>
 </table>
 

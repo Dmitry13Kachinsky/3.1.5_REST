@@ -35,6 +35,11 @@
 <hr/>
 
 <a href="/admin/new">Create new user</a>
+<br/>
+<hr/>
+<form th:action="@{/logout}" th:method="POST" target="_self">
+    <button>Logout</button>
+</form>
 
 </body>
 </html>

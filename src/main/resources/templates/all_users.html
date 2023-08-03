@@ -5,16 +5,17 @@
     <title></title>
 </head>
 <body>
-<table>
+<table border="1">
+    <thead>
     <tr>
         <th>id</th>
         <th>name</th>
         <th>surname</th>
         <th>username</th>
         <th>role</th>
-
     </tr>
-    <div th:each ="user : ${users}">
+    </thead>
+    <tbody th:each ="user : ${users}">
         <tr>
             <td th:text="${user.getId()}">VALUE</td>
             <td th:text="${user.getName()}">VALUE</td>
@@ -31,7 +32,7 @@
                 </form>
             </td>
         </tr>
-    </div>
+    </tbody>
 </table>
 
 

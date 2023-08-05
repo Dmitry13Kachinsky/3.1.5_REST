@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.entities.Role;
 import ru.kata.spring.boot_security.demo.entities.User;
-import ru.kata.spring.boot_security.demo.repositories.RoleRepository;
 import ru.kata.spring.boot_security.demo.repositories.UserRepository;
 
 import java.util.Collection;
@@ -21,26 +20,24 @@ import java.util.stream.Collectors;
 
 
 @Service
+@Transactional(readOnly = true)
 public class UserService implements UserDetailsService {
 
     private final BCryptPasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
+
 
     @Autowired
-    public UserService(@Lazy BCryptPasswordEncoder passwordEncoder, UserRepository userRepository, RoleRepository roleRepository) {
+    public UserService(@Lazy BCryptPasswordEncoder passwordEncoder, UserRepository userRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
+
     }
 
-
-    @Transactional(readOnly = true)
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
-    @Transactional(readOnly = true)
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
@@ -59,7 +56,6 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
-    @Transactional(readOnly = true)
     public User showUserById(Integer id) {
         return userRepository.getOne(id);
     }

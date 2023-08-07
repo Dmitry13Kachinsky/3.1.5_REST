@@ -65,7 +65,7 @@ public class UserService implements UserDetailsService {
         userRepository.deleteById(id);
     }
 
-    @Transactional
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = findByUsername(username);

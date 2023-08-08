@@ -13,18 +13,22 @@ import java.util.Set;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private int id;
 
+    @Column(name="name")
     private String name;
 
     @Column(name = "last_name")
     private String lastName;
 
+    @Column(name="age")
     private int age;
 
-    @Column(unique = true)
+    @Column(name="username", unique = true)
     private String username;
 
+    @Column(name="password")
     private String password;
 
     @ManyToMany(cascade = CascadeType.MERGE)

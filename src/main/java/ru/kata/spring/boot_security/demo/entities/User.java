@@ -4,43 +4,52 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 
 @Entity
-@Table(name="sec_users")
+@Table(name = "users")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
-    private Integer id;
-    @Column(name="name")
+    private int id;
+
     private String name;
 
-    @Column(name="surname")
-    private String surname;
+    @Column(name = "last_name")
+    private String lastName;
 
-    @Column(name="password")
-    private String password;
+    private int age;
 
-    @Column(name="username", unique = true)
+    @Column(unique = true)
     private String username;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    private Collection<Role> roles;
+    private String password;
+
+    @ManyToMany(cascade = CascadeType.MERGE)
+    private Set<Role> roles;
+
 
     public User() {
+
     }
 
-    public User(String name, String surname, String password, String username, Collection<Role> roles) {
+    public User(String name, String lastName, int age, String username, String password, Set<Role> roles) {
         this.name = name;
-        this.surname = surname;
-        this.password = password;
+        this.lastName = lastName;
+        this.age = age;
         this.username = username;
+        this.password = password;
         this.roles = roles;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -51,13 +60,44 @@ public class User implements UserDetails {
         this.name = name;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public String getLastName() {
+        return lastName;
     }
 
-    @Override
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
     public String getUsername() {
         return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     @Override
@@ -80,47 +120,17 @@ public class User implements UserDetails {
         return true;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
     }
 
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-
-    public Collection<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Collection<Role> roles) {
-        this.roles = roles;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", username='" + username + '\'' +
-                '}';
+    public String getRolesToString() {
+        List<Role> list = getRoles().stream().toList();
+        StringBuilder str = new StringBuilder(list.get(0).toString());
+        if (list.size() == 2) {
+            str.append(" ").append(list.get(1).toString());
+        }
+        return String.valueOf(str);
     }
 }

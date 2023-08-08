@@ -33,39 +33,49 @@ public class UserService implements UserDetailsService {
         this.userRepository = userRepository;
 
     }
-
+    @Transactional(readOnly = true)
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
+    @Transactional(readOnly = true)
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
     @Transactional
-    public void addNewUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+    public boolean addUser(User user) {
+        if (userRepository.findByUsername(user.getUsername()) == null) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            userRepository.save(user);
+            return true;
+        }
+        return false;
     }
 
     @Transactional
     public void updateUser(User user) {
-        if (!user.getPassword().equals(showUserById(user.getId()).getPassword())) {
+        if (user.getPassword().equals("")) {
+            user.setPassword(showUser(user.getId()).getPassword());
+        } else {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
+        user.setUsername(showUser(user.getId()).getUsername());
         userRepository.save(user);
     }
 
-    public User showUserById(Integer id) {
-        return userRepository.getOne(id);
+    @Transactional(readOnly = true)
+    public User showUser(int id) {
+        User user = userRepository.getOne(id);
+        return user;
     }
 
     @Transactional
-    public void removeUserById(Integer id) {
+    public void removeUser(int id) {
         userRepository.deleteById(id);
     }
 
-
+    @Transactional
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = findByUsername(username);

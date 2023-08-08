@@ -33,12 +33,11 @@ public class UserService implements UserDetailsService {
         this.userRepository = userRepository;
 
     }
-    @Transactional(readOnly = true)
+
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
-    @Transactional(readOnly = true)
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
@@ -64,7 +63,6 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
-    @Transactional(readOnly = true)
     public User showUser(int id) {
         User user = userRepository.getOne(id);
         return user;
@@ -75,17 +73,16 @@ public class UserService implements UserDetailsService {
         userRepository.deleteById(id);
     }
 
-    @Transactional
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = findByUsername(username);
-        if(user == null) {
+        if (user == null) {
             throw new UsernameNotFoundException(String.format("User `%s` not found", username));
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),mapRolesToAuthority(user.getRoles()));
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), mapRolesToAuthority(user.getRoles()));
     }
 
-    private Collection<? extends GrantedAuthority> mapRolesToAuthority (Collection<Role> roles) {
+    private Collection<? extends GrantedAuthority> mapRolesToAuthority(Collection<Role> roles) {
         return roles.stream().map(r -> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList());
     }
 }

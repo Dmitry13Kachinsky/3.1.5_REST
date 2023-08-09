@@ -37,8 +37,8 @@ public class Init implements CommandLineRunner {
         adminRoles.add(roleAdmin);
         userRoles.add(roleUser);
 
-        User userAdmin = new User("Admin", "Admin", 23, "admin", passwordEncoder.encode("admin"), adminRoles);
-        User userUser = new User("User", "User", 25, "user", passwordEncoder.encode("user"), userRoles);
+        User userAdmin = new User("Roy", "Jones", 45, "admin", passwordEncoder.encode("admin"), adminRoles);
+        User userUser = new User("Sam", "Mendez", 57, "user", passwordEncoder.encode("user"), userRoles);
         userRepository.save(userAdmin);
         userRepository.save(userUser);
     }

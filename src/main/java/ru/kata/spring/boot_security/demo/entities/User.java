@@ -15,16 +15,19 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name="name")
     private String name;
 
     @Column(name = "last_name")
     private String lastName;
 
+    @Column(name="age")
     private int age;
 
-    @Column(unique = true)
+    @Column(name="username", unique = true)
     private String username;
 
+    @Column(name="password")
     private String password;
 
     @ManyToMany(cascade = CascadeType.MERGE)
@@ -132,5 +135,18 @@ public class User implements UserDetails {
             str.append(" ").append(list.get(1).toString());
         }
         return String.valueOf(str);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", roles=" + roles +
+                '}';
     }
 }

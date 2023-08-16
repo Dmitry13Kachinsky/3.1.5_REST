@@ -12,6 +12,8 @@ public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name="name")
     private String name;
     @Transient
     @ManyToMany(mappedBy = "roles")
@@ -59,4 +61,5 @@ public class Role implements GrantedAuthority {
     public String getAuthority() {
         return getName();
     }
+    
 }

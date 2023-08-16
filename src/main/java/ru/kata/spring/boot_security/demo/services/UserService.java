@@ -64,7 +64,7 @@ public class UserService implements UserDetailsService {
     }
 
     public User showUser(int id) {
-        User user = userRepository.getOne(id);
+        User user = userRepository.findById(id).get();
         return user;
     }
 

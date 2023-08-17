@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <title>Page</title>
+</head>
+
+<body>
+<div class="container-fluid">
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+            <span class="navbar-brand">
+                <h5 class="navbar-brand col-md-3 col-lg-2 mr-0 px-3">
+                    <span id="userHeader3"></span> with roles:
+                    <span id="userHeader4"></span>
+                </h5>
+            </span>
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="row">
+        <div class="col-2">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">User</a>
+            </div>
+        </div>
+        <div class="col-10 bg-light">
+            <div class="tab-content" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                    <div class="page-header">
+                        <h2>User information-page</h2>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>About user</h5>
+                        </div>
+                        <div class="card-body">
+                            <!----card body--->
+                            <table class="table table-striped table-sm">
+                                <!---top--->
+                                <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Username</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Last Name</th>
+                                    <th scope="col">Age</th>
+                                    <th scope="col">Role</th>
+                                </tr>
+                                </thead>
+                                <tbody id="basicTable">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="/user.js"></script>
+
+</body>
+
+</html>

@@ -10,14 +10,14 @@ import ru.kata.spring.boot_security.demo.services.UserService;
 import java.security.Principal;
 import java.util.List;
 
-@org.springframework.web.bind.annotation.RestController
+@RestController
 @RequestMapping("/api")
-public class RestController {
+public class RestAPIController {
 
     private final UserService userService;
 
     @Autowired
-    public RestController(UserService userService) {
+    public RestAPIController(UserService userService) {
         this.userService = userService;
     }
 

@@ -8,11 +8,11 @@ import ru.kata.spring.boot_security.demo.services.UserService;
 import java.security.Principal;
 
 @Controller
-public class AdminController {
+public class ViewController {
 
     private final UserService userService;
 
-    public AdminController(UserService userService) {
+    public ViewController(UserService userService) {
         this.userService = userService;
     }
 
